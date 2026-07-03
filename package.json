@@ -1,0 +1,14 @@
+{
+  "name": "tracktheabundance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Mapping, analysis and tracking of the abundance funding world — Europe focus. Coefficient Giving (ex-Open Philanthropy), Good Ventures and the Collison/Stripe network, and how their money and agenda enter Europe.",
+  "scripts": {
+    "dev": "python3 -m http.server 5178",
+    "update:tracking": "node scripts/update-tracking.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.106.0"
+  }
+}
