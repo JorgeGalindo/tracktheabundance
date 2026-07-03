@@ -34,15 +34,21 @@ async function boot() {
   data.nodes.forEach(n => (state.nodesById[n.id] = n));
   buildLegend();
   wireControls();
+  if (location.hash === "#geo" || location.hash === "#map") {
+    state.mode = "map";
+    document.querySelectorAll(".toggle button").forEach(b => b.classList.toggle("on", b.dataset.mode === "map"));
+    const sub = document.getElementById("viz-sub");
+    if (sub) sub.textContent = "Geography · US capital (left) flowing into European grantees & EU policy arenas";
+  }
   layout();
   render();
 }
 
 /* ---------- sizing ---------- */
 function nodeRadius(n) {
-  const base = { source: 25, engine: 29, fund: 19, infra: 15, grantee: 12, target: 12 }[n.kind] || 12;
+  const base = { source: 16, engine: 18, fund: 14, infra: 12, grantee: 10, target: 11 }[n.kind] || 11;
   let bump = 0;
-  if (n.magnitude) bump = clamp(3.1 * log10(n.magnitude / 1e6 + 1), 0, 14);
+  if (n.magnitude) bump = clamp(2.4 * log10(n.magnitude / 1e6 + 1), 0, 6);
   return base + bump;
 }
 function edgeWidth(e) {
@@ -64,21 +70,42 @@ function layout() {
   return state.mode === "flow" ? layoutFlow() : layoutMap();
 }
 
+const FLOW_BANDS = [
+  { kinds: ["source"],  x: 112 },
+  { kinds: ["engine"],  x: 300 },
+  { kinds: ["fund"],    x: 496 },
+  { kinds: ["infra"],   x: 648 },
+  { kinds: ["grantee"], x: 872, right: true }, // dense column: labels go to the right
+  { kinds: ["target"],  x: 1188 }
+];
 function layoutFlow() {
-  const cols = { source: 0, engine: 1, fund: 2, infra: 2, grantee: 3, target: 4 };
-  const colX = [150, 372, 628, 902, 1148];
-  const buckets = [[], [], [], [], []];
-  state.data.nodes.forEach(n => buckets[cols[n.kind]].push(n));
-  // order col2 so funds sit above infra
-  buckets[2].sort((a, b) => (a.kind === "fund" ? 0 : 1) - (b.kind === "fund" ? 0 : 1));
-  // order others by domain for tidy grouping
-  [0, 1, 3, 4].forEach(c => buckets[c].sort((a, b) => a.domain.localeCompare(b.domain)));
-  const top = 96, bot = 664;
-  buckets.forEach((list, c) => {
-    const n = list.length;
-    list.forEach((node, i) => {
-      node._x = colX[c];
-      node._y = n === 1 ? (top + bot) / 2 : top + (bot - top) * (i / (n - 1));
+  const top = 92, gap = 16;
+  let maxH = 0;
+  const columns = FLOW_BANDS.map(b => {
+    const list = state.data.nodes
+      .filter(n => b.kinds.includes(n.kind))
+      .sort((a, c) => a.domain.localeCompare(c.domain) || (c.magnitude || 0) - (a.magnitude || 0));
+    let cursor = 0;
+    const placed = list.map(n => {
+      const r = nodeRadius(n);
+      const showMag = !b.right && (n.kind === "source" || n.kind === "engine" || n.kind === "fund") && n.magnitudeLabel;
+      const labelH = b.right ? 0 : 15 + (showMag ? 13 : 0); // vertical room for label(s) below
+      const foot = 2 * r + labelH;
+      const cy = cursor + r;
+      cursor += foot + gap;
+      return { n, cy };
+    });
+    const h = Math.max(0, cursor - gap);
+    maxH = Math.max(maxH, h);
+    return { b, placed, h };
+  });
+  state.contentH = Math.round(top + maxH + 58);
+  columns.forEach(col => {
+    const offset = top + (maxH - col.h) / 2;
+    col.placed.forEach(p => {
+      p.n._x = col.b.x;
+      p.n._y = offset + p.cy;
+      p.n._labelRight = !!col.b.right;
     });
   });
 }
@@ -90,41 +117,52 @@ function projectEU(lon, lat) {
   return { x: 348 + px * (1198 - 348), y: 92 + py * (662 - 92) };
 }
 function layoutMap() {
+  state.contentH = 752;
+  state.data.nodes.forEach(n => (n._labelRight = false));
   // US / capital nodes stack in a left "Atlantic" gutter
   const usNodes = state.data.nodes.filter(n => n.region === "us");
   const order = { source: 0, engine: 1, fund: 2, infra: 3 };
   usNodes.sort((a, b) => (order[a.kind] - order[b.kind]) || a.domain.localeCompare(b.domain));
-  const gTop = 92, gBot = 662, gx = 132;
+  const gTop = 96, gBot = 668, gx = 158;
   usNodes.forEach((n, i) => {
-    n._x = gx + (i % 2 ? 46 : -46) * 0.6;
+    n._x = gx + (i % 2 ? 34 : -34);
     n._y = gTop + (gBot - gTop) * (i / (usNodes.length - 1));
   });
   // European nodes by projection
   const eu = state.data.nodes.filter(n => n.region === "europe");
   eu.forEach(n => { const p = projectEU(n.lon, n.lat); n._x = p.x; n._y = p.y; });
-  // de-overlap dense clusters (London, Brussels)
-  for (let pass = 0; pass < 60; pass++) {
+  // de-overlap dense clusters (London, Brussels): min distance leaves room for labels
+  for (let pass = 0; pass < 120; pass++) {
+    let moved = false;
     for (let i = 0; i < eu.length; i++) for (let j = i + 1; j < eu.length; j++) {
       const a = eu[i], b = eu[j];
       let dx = b._x - a._x, dy = b._y - a._y;
       let d = Math.hypot(dx, dy) || 0.01;
-      const min = nodeRadius(a) + nodeRadius(b) + 30;
+      const min = nodeRadius(a) + nodeRadius(b) + 46;
       if (d < min) {
         const push = (min - d) / 2;
         dx /= d; dy /= d;
         a._x -= dx * push; a._y -= dy * push;
         b._x += dx * push; b._y += dy * push;
+        moved = true;
       }
     }
+    if (!moved) break;
   }
-  eu.forEach(n => { n._x = clamp(n._x, 300, 1230); n._y = clamp(n._y, 80, 680); });
+  eu.forEach(n => { n._x = clamp(n._x, 296, 1236); n._y = clamp(n._y, 84, 700); });
 }
 
 /* ---------- render ---------- */
 function render() {
   const svg = document.getElementById("viz-svg");
   svg.innerHTML = "";
-  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const CH = state.contentH || H;
+  // Explicit width/height attributes give the SVG an intrinsic aspect ratio —
+  // without them Safari can render the board at height 0 (blank map).
+  svg.setAttribute("viewBox", `0 0 ${W} ${CH}`);
+  svg.setAttribute("width", W);
+  svg.setAttribute("height", CH);
+  svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
   const stage = el("g", { id: "stage" }, svg);
   applyTransform();
@@ -174,13 +212,18 @@ function render() {
     if (n.kind === "source" || n.kind === "engine") dot.setAttribute("stroke", "#fff"), dot.setAttribute("stroke-opacity", "0.25");
 
     // labels
-    const showMag = (n.kind === "source" || n.kind === "engine" || n.kind === "fund");
-    const ly = r + 14;
-    const lbl = el("text", { class: "lbl", x: 0, y: ly, "text-anchor": "middle" }, g);
-    lbl.textContent = n.label;
-    if (showMag && n.magnitudeLabel) {
-      const m = el("text", { class: "mag", x: 0, y: ly + 13, "text-anchor": "middle" }, g);
-      m.textContent = n.magnitudeLabel;
+    if (n._labelRight) {
+      const lbl = el("text", { class: "lbl", x: r + 8, y: 0, "text-anchor": "start", "dominant-baseline": "middle" }, g);
+      lbl.textContent = n.label;
+    } else {
+      const showMag = (n.kind === "source" || n.kind === "engine" || n.kind === "fund");
+      const ly = r + 14;
+      const lbl = el("text", { class: "lbl", x: 0, y: ly, "text-anchor": "middle" }, g);
+      lbl.textContent = n.label;
+      if (state.mode === "flow" && showMag && n.magnitudeLabel) {
+        const m = el("text", { class: "mag", x: 0, y: ly + 13, "text-anchor": "middle" }, g);
+        m.textContent = n.magnitudeLabel;
+      }
     }
     g.addEventListener("click", (ev) => { ev.stopPropagation(); selectNode(n.id); });
     g.addEventListener("mouseenter", () => { if (!state.selected) highlight(n.id, true); });
@@ -209,18 +252,19 @@ function edgePath(s, t) {
 
 /* ---------- backdrops ---------- */
 function drawFlowBackdrop(g) {
+  const CH = state.contentH || H;
   const caps = [
-    { x: 150, t: "US capital" }, { x: 372, t: "Engine" },
-    { x: 628, t: "Funds + network" }, { x: 902, t: "European beachheads" }, { x: 1148, t: "EU policy" }
+    { x: 112, t: "US capital" }, { x: 300, t: "Engine" }, { x: 496, t: "Funds" },
+    { x: 648, t: "US network" }, { x: 872, t: "European beachheads" }, { x: 1188, t: "EU policy" }
   ];
   caps.forEach(c => {
-    const t = el("text", { class: "col-cap", x: c.x, y: 52, "text-anchor": "middle" }, g);
+    const t = el("text", { class: "col-cap", x: c.x, y: 46, "text-anchor": "middle" }, g);
     t.textContent = c.t;
   });
-  // "entering Europe" divider between funds and beachheads
-  const dx = 765;
-  el("line", { class: "col-rule", x1: dx, y1: 72, x2: dx, y2: 680 }, g);
-  const cap = el("text", { class: "atlantic-label", x: dx, y: 700, "text-anchor": "middle" }, g);
+  // "entering Europe" divider between the US network and the European beachheads
+  const dx = 762;
+  el("line", { class: "col-rule", x1: dx, y1: 62, x2: dx, y2: CH - 34 }, g);
+  const cap = el("text", { class: "atlantic-label", x: dx, y: CH - 14, "text-anchor": "middle" }, g);
   cap.textContent = "▶  ENTERING EUROPE";
 }
 
