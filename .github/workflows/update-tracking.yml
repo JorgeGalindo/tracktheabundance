@@ -1,11 +1,12 @@
 name: Update tracking feed
 
-# A diario: si hay ANTHROPIC_API_KEY, busca novedades del abundance-funding en
+# Semanal: si hay ANTHROPIC_API_KEY, busca novedades del abundance-funding en
 # Europa (Claude + web search) y las fusiona en data/tracking.json. Si algo
 # cambia, hace commit; la integración Git de Vercel redespliega sola.
+# Una sola pasada/semana para mantener el coste en unos céntimos.
 on:
   schedule:
-    - cron: "0 7 * * *" # 07:00 UTC cada día
+    - cron: "0 7 * * 1" # 07:00 UTC cada lunes
   workflow_dispatch: {} # lanzable a mano desde la pestaña Actions
 
 permissions:
