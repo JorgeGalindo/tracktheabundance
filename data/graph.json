@@ -208,6 +208,21 @@
       "blurb": "UK growth/YIMBY campaign. A Coefficient Abundance & Growth grant to a group like this would be the first evidence that the US-first abundance fund is internationalising into Europe — none exists yet. Drawn as a dashed 'watch' link.",
       "tags": ["UK YIMBY", "watch", "no grant yet"] },
 
+    { "id": "silicon-continent", "label": "Silicon Continent", "kind": "grantee", "domain": "progress", "region": "europe", "adjacent": true,
+      "city": "London / EU", "country": "UK", "lat": 51.545, "lon": -0.020, "magnitude": null, "magnitudeLabel": "ecosystem-adjacent",
+      "blurb": "Policy newsletter by Luis Garicano (LSE, former MEP) and Pieter Garicano on why Europe lags the US in growth, AI and innovation — a reference text of the European abundance debate. Pieter Garicano is also managing editor of Stripe-owned Works in Progress; no direct network grant documented.",
+      "tags": ["adjacent", "EU growth debate", "Works in Progress overlap"] },
+
+    { "id": "cbp", "label": "Centre for British Progress", "kind": "grantee", "domain": "progress", "region": "europe", "adjacent": true,
+      "city": "London", "country": "UK", "lat": 51.516, "lon": -0.148, "magnitude": null, "magnitudeLabel": "funders not itemised",
+      "blurb": "UK progress-studies think tank relaunched in 2025 from UK Day One (Julia Garayo Willemyns, David Lawrence; board chaired by YIMBY Alliance co-founder John Myers). States it is funded by a mix of British, European and American charitable foundations, not itemised publicly. Runs its own 'Fast Grants for British Progress', echoing the Collison/Cowen Fast Grants model.",
+      "tags": ["adjacent", "UK", "runs fast grants"] },
+
+    { "id": "lfg", "label": "Looking for Growth", "kind": "grantee", "domain": "progress", "region": "europe", "adjacent": true,
+      "city": "London", "country": "UK", "lat": 51.487, "lon": -0.165, "magnitude": null, "magnitudeLabel": "campaign movement",
+      "blurb": "UK pro-growth campaign group founded in 2024 by Lawrence Newport, combining policy proposals on infrastructure and planning with public campaigning. No documented funding from the network — included as part of the native UK abundance cluster.",
+      "tags": ["adjacent", "UK", "campaigning"] },
+
     { "id": "cfg", "label": "Centre for Future Generations", "kind": "grantee", "domain": "biosecurity", "region": "europe", "adjacent": true,
       "city": "Brussels", "country": "Belgium", "lat": 50.838, "lon": 4.373, "magnitude": null, "magnitudeLabel": "ecosystem-adjacent",
       "blurb": "Brussels think tank on AI and biosecurity; a Talos placement host. Its 2025 biosecurity briefing (with RAND Europe, IBBIS and Pour Demain) anticipated the DNA-synthesis-screening provisions of the EU Biotech Act. Publicly funded by the Dreamery and Tanka foundations, not Coefficient — included as an adjacent node.",
@@ -278,6 +293,9 @@
 
     { "source": "fund-biosecurity", "target": "cltr", "kind": "funds", "label": "biosecurity" },
     { "source": "fund-abundance", "target": "britain-remade", "kind": "watch", "label": "watch: no grant yet" },
+    { "source": "fund-abundance", "target": "cbp", "kind": "watch", "label": "US foundations among funders — unnamed" },
+    { "source": "fund-abundance", "target": "lfg", "kind": "watch", "label": "watch: no grant" },
+    { "source": "works-in-progress", "target": "silicon-continent", "kind": "influence", "label": "shared editor (P. Garicano)" },
 
     { "source": "talos", "target": "eu-ai-office", "kind": "influence", "label": "places fellows" },
     { "source": "future-society", "target": "eu-ai-office", "kind": "influence", "label": "EU AI Act" },

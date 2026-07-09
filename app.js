@@ -164,6 +164,19 @@ function render() {
   svg.setAttribute("height", CH);
   svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
 
+  // arrowhead markers, one per edge colour (defs are wiped with innerHTML each render)
+  const defs = el("defs", {}, svg);
+  const markerIds = new Set();
+  const markerFor = (color) => {
+    const id = "arr-" + color.replace("#", "");
+    if (!markerIds.has(id)) {
+      markerIds.add(id);
+      const m = el("marker", { id, viewBox: "0 0 10 10", refX: 7.5, refY: 5, markerWidth: 6.5, markerHeight: 6.5, orient: "auto-start-reverse" }, defs);
+      el("path", { d: "M 0 1.6 L 8.4 5 L 0 8.4 z", fill: color, "fill-opacity": 0.8 }, m);
+    }
+    return `url(#${id})`;
+  };
+
   const stage = el("g", { id: "stage" }, svg);
   applyTransform();
 
@@ -187,6 +200,8 @@ function render() {
       "stroke-width": edgeWidth(e),
       "stroke-opacity": e.kind === "watch" ? 0.5 : 0.4
     }, gEdges);
+    // direction arrows on money/influence edges (not on interlocks, which are relationships)
+    if (e.kind !== "interlock") path.setAttribute("marker-end", markerFor(edgeColor(e)));
     e._el = path; e._s = s; e._t = t;
   });
 
@@ -238,27 +253,45 @@ function render() {
 function hashStr(s){let h=0;for(let i=0;i<s.length;i++){h=(h<<5)-h+s.charCodeAt(i)|0;}return h;}
 
 function edgePath(s, t) {
+  // paths stop at the node edge (not the centre) so arrowheads stay visible
+  const rS = nodeRadius(s) + 4, rT = nodeRadius(t) + 9;
   if (state.mode === "flow") {
-    const mx = (s._x + t._x) / 2;
-    return `M ${s._x} ${s._y} C ${mx} ${s._y}, ${mx} ${t._y}, ${t._x} ${t._y}`;
+    if (Math.abs(s._x - t._x) < 1) {
+      // same-column edge: bow out to the left (labels sit to the right)
+      const bx = s._x - 74;
+      return `M ${s._x - rS} ${s._y} C ${bx} ${s._y}, ${bx} ${t._y}, ${t._x - rT} ${t._y}`;
+    }
+    const dir = t._x > s._x ? 1 : -1;
+    const x0 = s._x + dir * rS, x1 = t._x - dir * rT;
+    const mx = (x0 + x1) / 2;
+    return `M ${x0} ${s._y} C ${mx} ${s._y}, ${mx} ${t._y}, ${x1} ${t._y}`;
   }
   const mx = (s._x + t._x) / 2, my = (s._y + t._y) / 2;
   const dx = t._x - s._x, dy = t._y - s._y;
   const nx = -dy, ny = dx, len = Math.hypot(nx, ny) || 1;
   const bow = clamp(len * 0.12, 8, 60);
   const cx = mx + (nx / len) * bow, cy = my + (ny / len) * bow;
-  return `M ${s._x} ${s._y} Q ${cx} ${cy} ${t._x} ${t._y}`;
+  let ux = t._x - cx, uy = t._y - cy; const ul = Math.hypot(ux, uy) || 1; ux /= ul; uy /= ul;
+  let vx = cx - s._x, vy = cy - s._y; const vl = Math.hypot(vx, vy) || 1; vx /= vl; vy /= vl;
+  return `M ${s._x + vx * rS} ${s._y + vy * rS} Q ${cx} ${cy} ${t._x - ux * rT} ${t._y - uy * rT}`;
 }
 
 /* ---------- backdrops ---------- */
 function drawFlowBackdrop(g) {
   const CH = state.contentH || H;
+  // US / Europe zones
+  el("rect", { x: 44, y: 32, width: 692, height: CH - 66, rx: 14, fill: "#ffffff", "fill-opacity": 0.015 }, g);
+  el("rect", { x: 788, y: 32, width: 458, height: CH - 66, rx: 14, fill: "#003399", "fill-opacity": 0.10, stroke: "#4d8bf0", "stroke-opacity": 0.14 }, g);
+  const zu = el("text", { class: "zone-cap", x: 390, y: 22, "text-anchor": "middle", fill: "#9aa3b8" }, g);
+  zu.textContent = "United States";
+  const ze = el("text", { class: "zone-cap", x: 1017, y: 22, "text-anchor": "middle", fill: "#FFCC00" }, g);
+  ze.textContent = "✦ Europe ✦";
   const caps = [
     { x: 112, t: "US capital" }, { x: 300, t: "Engine" }, { x: 496, t: "Funds" },
     { x: 648, t: "US network" }, { x: 872, t: "European grantees" }, { x: 1188, t: "EU policy" }
   ];
   caps.forEach(c => {
-    const t = el("text", { class: "col-cap", x: c.x, y: 46, "text-anchor": "middle" }, g);
+    const t = el("text", { class: "col-cap", x: c.x, y: 50, "text-anchor": "middle" }, g);
     t.textContent = c.t;
   });
   // "entering Europe" divider between the US network and the European beachheads
@@ -275,6 +308,11 @@ const GEO = [
   { t: "SWITZ.", lon: 8.2, lat: 46.6 }
 ];
 function drawMapBackdrop(g) {
+  // US gutter vs Europe zones
+  el("rect", { x: 34, y: 40, width: 214, height: 676, rx: 16, fill: "#ffffff", "fill-opacity": 0.015 }, g);
+  el("rect", { x: 268, y: 40, width: 978, height: 676, rx: 16, fill: "#003399", "fill-opacity": 0.09, stroke: "#4d8bf0", "stroke-opacity": 0.12 }, g);
+  const ze = el("text", { class: "zone-cap", x: 1232, y: 66, "text-anchor": "end", fill: "#FFCC00" }, g);
+  ze.textContent = "✦ Europe ✦";
   // atlantic gutter caption
   const a = el("text", { class: "atlantic-label", x: 132, y: 60, "text-anchor": "middle" }, g);
   a.textContent = "◀ US CAPITAL";

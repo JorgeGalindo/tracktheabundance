@@ -173,6 +173,7 @@ h1 .hl-b { color: var(--eu-blue-bright); }
 
 /* column headers for flow mode */
 .col-cap { fill: var(--ink-faint); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; }
+.zone-cap { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; opacity: 0.75; }
 .col-rule { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 5; }
 
 /* legend */
