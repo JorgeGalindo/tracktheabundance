@@ -19,7 +19,7 @@ const MAX_ITEMS = 80; // keep the feed bounded
 
 const CATEGORIES = [
   "money-flow", "ai-governance", "animal-welfare",
-  "abundance-progress", "biosecurity", "org-network", "critique"
+  "abundance-progress", "biosecurity", "org-network", "rfp-calls", "critique"
 ];
 
 function isoToday() {
@@ -69,7 +69,11 @@ async function main() {
 
   const prompt = `You are the research tracker for a microsite that maps the "abundance funding world" with a EUROPE focus — the network around Coefficient Giving (formerly Open Philanthropy), Good Ventures (Dustin Moskovitz / Cari Tuna), and the Collison/Stripe ecosystem (Progress Studies, Arc Institute, Institute for Progress), and how their money and agenda enter Europe (EU AI governance, farm-animal welfare, the "abundance"/YIMBY/progress movement, biosecurity / the EU Biotech Act).
 
-Today is ${isoToday()}. Use web search to find genuinely NEW, REAL, CITED developments from roughly the last 60 days, weighted heavily toward the EUROPE angle. Search across these threads: Coefficient Giving grants/funds/donors; EU AI governance (BlueDot Impact, CLTR, Talos Network, The Future Society, SaferAI, Pour Demain, EU AI Office, EU AI Act); farm-animal welfare in the EU (Eurogroup for Animals, Compassion in World Farming, Animal Equality, Equalia, Albert Schweitzer Foundation, L214); the Collison/Stripe/Progress Ireland/Works in Progress/ARIA/Arc Institute world; the abundance movement in Europe/UK (YIMBY, Britain Remade, planning reform) and its critiques; the EU Biotech Act and biosecurity policy.
+Today is ${isoToday()}. Use web search to find genuinely NEW, REAL, CITED developments from roughly the last 60 days, weighted heavily toward the EUROPE angle. Search across these threads: Coefficient Giving grants/funds/donors; EU AI governance (BlueDot Impact, CLTR, Talos Network, The Future Society, SaferAI, Pour Demain, Centre for Future Generations, EU AI Office, EU AI Act); farm-animal welfare in the EU (Eurogroup for Animals, Compassion in World Farming, Animal Equality, Equalia, Albert Schweitzer Foundation, L214); the Collison/Stripe/Progress Ireland/Works in Progress/ARIA/Arc Institute world; the abundance movement in Europe/UK (YIMBY, Britain Remade, planning reform) and its critiques; the EU Biotech Act and biosecurity policy; effective-giving platforms in Europe (Doneer Effectief, Effektiv Spenden); and adjacent funders that share grantees (Navigation Fund, Survival & Flourishing Fund, Emergent Ventures).
+
+PRIORITY THREAD — grant-access mechanics (category "rfp-calls"): new or reopened RFPs, calls for proposals, expression-of-interest windows, fellowship application rounds (e.g. Talos), matching pledges, and application deadlines from Coefficient Giving's funds (Navigating Transformative AI, Biosecurity & Pandemic Preparedness, Effective Giving & Careers, Abundance & Growth, Farm Animal Welfare) and the adjacent funders above — especially anything open to European organisations. Always include the deadline in the summary when one exists.
+
+Write titles and summaries in a strictly factual, sober register: no hype, no drama, attribute contested claims to their source.
 
 Do NOT repeat items already in the feed. Here are the most recent existing entries (avoid duplicates and near-duplicates):
 ${recentTitles || "(none yet)"}

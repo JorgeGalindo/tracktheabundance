@@ -7,6 +7,7 @@ const CATS = {
   "abundance-progress": "Abundance / progress",
   "biosecurity": "Biosecurity",
   "org-network": "Org & network",
+  "rfp-calls": "RFPs & open calls",
   "critique": "Critique"
 };
 const CAT_LABEL = { ...CATS };

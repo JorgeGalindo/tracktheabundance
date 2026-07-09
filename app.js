@@ -255,7 +255,7 @@ function drawFlowBackdrop(g) {
   const CH = state.contentH || H;
   const caps = [
     { x: 112, t: "US capital" }, { x: 300, t: "Engine" }, { x: 496, t: "Funds" },
-    { x: 648, t: "US network" }, { x: 872, t: "European beachheads" }, { x: 1188, t: "EU policy" }
+    { x: 648, t: "US network" }, { x: 872, t: "European grantees" }, { x: 1188, t: "EU policy" }
   ];
   caps.forEach(c => {
     const t = el("text", { class: "col-cap", x: c.x, y: 46, "text-anchor": "middle" }, g);
@@ -375,7 +375,7 @@ function wireControls() {
       state.tf = { x: 0, y: 0, k: 1 };
       const sub = document.getElementById("viz-sub");
       if (sub) sub.textContent = state.mode === "flow"
-        ? "Money flow · US capital → engine → funds → European beachheads → EU policy"
+        ? "Money flow · US capital → engine → funds → European grantees → EU policy"
         : "Geography · US capital (left) flowing into European grantees & EU policy arenas";
       closeDetail(); layout(); render();
     });

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "The Abundance Funding World — Europe",
-    "updated": "2026-07-03",
+    "updated": "2026-07-09",
     "note": "Curated from three research briefs (see /research). USD magnitudes are approximate and used for visual scaling; see each node for the sourced figure.",
     "eur_usd": 1.08,
     "gbp_usd": 1.27
@@ -19,7 +19,7 @@
     "engine":  "Grantmaking engine",
     "fund":    "Multi-donor fund",
     "infra":   "US intellectual infrastructure",
-    "grantee": "European beachhead",
+    "grantee": "European grantee",
     "target":  "EU policy arena"
   },
   "nodes": [
@@ -30,7 +30,7 @@
 
     { "id": "collison", "label": "Patrick Collison / Stripe", "kind": "source", "domain": "progress", "region": "us",
       "people": "Patrick Collison", "magnitude": 17500000000, "magnitudeLabel": "~$17.5B · Stripe $159B",
-      "blurb": "Stripe co-founder/CEO. Named contributor to Coefficient's $120M Abundance & Growth Fund, co-founding donor of the Arc Institute, and launcher of the Progress Studies movement. The bridge between the EA/Open-Phil world and the abundance agenda.",
+      "blurb": "Stripe co-founder/CEO. Named contributor to Coefficient's $120M Abundance & Growth Fund, co-founding donor of the Arc Institute, and co-launcher of the Progress Studies movement (2019, with Tyler Cowen). A fund donor and network ally — not a Coefficient board member; Stripe as a company does not fund Coefficient.",
       "tags": ["progress studies", "Arc Institute", "Meta board"] },
 
     { "id": "gates", "label": "Gates Foundation", "kind": "source", "domain": "health", "region": "us",
@@ -55,8 +55,8 @@
 
     { "id": "coefficient", "label": "Coefficient Giving", "kind": "engine", "domain": "capital", "region": "us",
       "people": "CEO Alexander Berger · Chair Cari Tuna", "magnitude": 1000000000, "magnitudeLabel": ">$1B directed in 2025",
-      "blurb": "Formerly Open Philanthropy — rebranded 18 Nov 2025. The research-and-grantmaking engine of the whole network. Directed over $1B in 2025 across ~13 multi-donor 'funds' other philanthropists can join. Keeps a London coworking hub and European-time-zone staff.",
-      "tags": ["ex-Open Philanthropy", "13 funds", "London hub"] },
+      "blurb": "Formerly Open Philanthropy — rebranded 18 Nov 2025. The research-and-grantmaking engine of the network. Directed over $1B in 2025 across ~13 multi-donor 'funds' that accept outside donors from $250k/year, served by a ~10-person partnerships team. Keeps a London coworking hub and European-time-zone staff; several of its funds run open RFP or EOI application cycles.",
+      "tags": ["ex-Open Philanthropy", "13 funds", "London hub", "open RFP cycles"] },
 
     { "id": "givewell", "label": "GiveWell", "kind": "engine", "domain": "health", "region": "us",
       "people": "Elie Hassenfeld", "magnitude": null, "magnitudeLabel": "charity evaluator",
@@ -65,7 +65,7 @@
 
     { "id": "fund-abundance", "label": "Abundance & Growth Fund", "kind": "fund", "domain": "progress", "region": "us",
       "people": "Program Director Matt Clancy", "magnitude": 120000000, "magnitudeLabel": "$120M · US-focused",
-      "blurb": "Launched March 2025. Good Ventures committed $60M, matched by Patrick Collison and two private funders. Absorbs Open Phil's housing (YIMBY) and innovation-policy work. Currently 'primarily in the United States' — international expansion is aspirational.",
+      "blurb": "Launched March 2025. Good Ventures committed $60M, matched by Patrick Collison and two private funders. Absorbs Open Phil's housing (YIMBY) and innovation-policy work. Currently 'primarily in the United States'; international expansion is stated as a future possibility but has no confirmed European grants.",
       "tags": ["YIMBY", "innovation policy", "US-first"] },
 
     { "id": "fund-leaf", "label": "Lead Exposure Action Fund", "kind": "fund", "domain": "health", "region": "us",
@@ -75,23 +75,28 @@
 
     { "id": "fund-ai", "label": "Navigating Transformative AI", "kind": "fund", "domain": "ai", "region": "us",
       "people": "AI governance & technical safety", "magnitude": 140000000, "magnitudeLabel": ">$140M in 2025",
-      "blurb": "Coefficient's AI programme — technical safety plus governance. Grantmaking scaled from ~$40M (2024) to over $140M (2025). The channel funding the UK/EU AI-policy beachheads and open to European applicants via its RFPs.",
-      "tags": ["AI safety", "governance", "open RFPs"] },
+      "blurb": "Coefficient's AI programme — technical safety plus governance. Grantmaking scaled from ~$40M (2024) to over $140M (2025). Funds the UK/EU AI-policy grantees; its AI Governance and Technical AI Safety RFPs are explicitly open to European applicants.",
+      "tags": ["AI safety", "governance", "RFPs open to Europe"] },
 
     { "id": "fund-animal", "label": "Farm Animal Welfare", "kind": "fund", "domain": "animal", "region": "us",
       "people": "Lead: Lewis Bollard", "magnitude": null, "magnitudeLabel": "world's largest funder",
-      "blurb": "Coefficient is 'the world's biggest funder of farm animal welfare', and Europe is its most active welfare region — the most concrete, euro-denominated way abundance-world money already lands in Europe.",
+      "blurb": "Coefficient describes itself as the world's biggest funder of farm animal welfare, and Europe is its most active welfare region — the largest confirmed flow of network money into European organisations, mostly as multi-year general support.",
       "tags": ["cage-free", "EU = most active region"] },
 
     { "id": "fund-biosecurity", "label": "Biosecurity & Pandemic Prep", "kind": "fund", "domain": "biosecurity", "region": "us",
-      "people": "GCR programme", "magnitude": null, "magnitudeLabel": "EOIs open to May 2026",
-      "blurb": "Funds pandemic and biosecurity policy. The EU Biotech Act (Commission proposal Dec 2025) is the most plausible near-term European channel for Coefficient-funded influence, via grantees like CLTR.",
-      "tags": ["EU Biotech Act", "GCR"] },
+      "people": "GCR programme", "magnitude": null, "magnitudeLabel": "EOI cycles (last closed 11 May 2026)",
+      "blurb": "Funds pandemic and biosecurity policy through periodic expression-of-interest cycles (the most recent closed 11 May 2026). The EU Biotech Act (Commission proposal Dec 2025) is its most direct European policy connection, via grantees like CLTR.",
+      "tags": ["EU Biotech Act", "GCR", "EOI cycles"] },
 
     { "id": "fund-strepa", "label": "Strep A Vaccine Fund", "kind": "fund", "domain": "health", "region": "us",
       "people": "anchors: Southworth, Winkels, GV", "magnitude": 200000000, "magnitudeLabel": "$200M target · ~$140M raised",
       "blurb": "Newer multi-donor vaccine fund targeting $200M (~$140M raised at launch), anchored by Good Ventures, Lucinda Southworth, Adam & Abigail Winkel and the Patchwork Collective.",
       "tags": ["vaccine", "multi-donor"] },
+
+    { "id": "fund-eg", "label": "Effective Giving & Careers", "kind": "fund", "domain": "capital", "region": "us",
+      "people": "effective-giving RFP", "magnitude": null, "magnitudeLabel": "RFP · funds European platforms",
+      "blurb": "Coefficient's fund for growing the effective-giving ecosystem. Its open RFP has funded European donation platforms — Doneer Effectief (Netherlands) and Effektiv Spenden (Germany) — which in turn regrant to European organisations. The one fund whose confirmed European grantees are funding infrastructure rather than policy groups.",
+      "tags": ["RFP", "regranting", "EU platforms"] },
 
     { "id": "arc", "label": "Arc Institute", "kind": "infra", "domain": "progress", "region": "us",
       "people": "Collison · Konermann · Hsu", "magnitude": 650000000, "magnitudeLabel": "$650M+",
@@ -110,7 +115,7 @@
 
     { "id": "anthropic", "label": "Anthropic", "kind": "infra", "domain": "ai", "region": "us",
       "people": "Daniela & Dario Amodei", "magnitude": 965000000000, "magnitudeLabel": "~$965B · filed for IPO (Jun 2026)",
-      "blurb": "The frontier AI lab at the centre of the network's interlock: Coefficient co-founder Holden Karnofsky is married to president Daniela Amodei and joined Anthropic in Jan 2025; Moskovitz and Tallinn were early investors. After a $65B Series H at a ~$965B valuation it filed confidentially for an IPO around June 2026 — the network's biggest potential future funding source, since an IPO would mint a wave of EA-aligned wealth.",
+      "blurb": "The frontier AI lab most connected to the network: Coefficient co-founder Holden Karnofsky is married to president Daniela Amodei and joined Anthropic in Jan 2025; Moskovitz and Tallinn were early investors. After a $65B Series H at a ~$965B valuation it filed confidentially for an IPO around June 2026. An IPO would create substantial liquid wealth among EA-aligned shareholders — a potential future funding source for the field.",
       "tags": ["interlock", "IPO filed 2026"] },
 
     { "id": "bluedot", "label": "BlueDot Impact", "kind": "grantee", "domain": "ai", "region": "europe",
@@ -134,14 +139,24 @@
       "tags": ["EU AI Act", "Talos host"] },
 
     { "id": "saferai", "label": "SaferAI", "kind": "grantee", "domain": "ai", "region": "europe",
-      "city": "Paris", "country": "France", "lat": 48.804, "lon": 2.301, "magnitude": null, "magnitudeLabel": "grant unconfirmed",
-      "blurb": "French AI-safety and risk-management organisation named in the EU AI-governance orbit (specific Coefficient grant unconfirmed post-database-deprecation).",
-      "tags": ["France", "unconfirmed"] },
+      "city": "Paris", "country": "France", "lat": 48.804, "lon": 2.301, "magnitude": 170227, "magnitudeLabel": "€170,227 via Effektiv Spenden (H1 2025)",
+      "blurb": "French AI-safety and risk-management organisation; contributed to the EU AI Act's Code of Practice. No direct Coefficient grant confirmed, but it received €170,227 in H1 2025 regranted through Effektiv Spenden's 'Ensuring Safe AI' and 'Safeguarding the Future' funds — an example of the regranting route into European policy work.",
+      "tags": ["France", "regrant-funded", "EU AI Act CoP"] },
 
     { "id": "pourdemain", "label": "Pour Demain", "kind": "grantee", "domain": "ai", "region": "europe",
       "city": "Bern", "country": "Switzerland", "lat": 46.948, "lon": 7.447, "magnitude": null, "magnitudeLabel": "grant unconfirmed",
-      "blurb": "Swiss AI & biosecurity policy non-profit in the European GCR-policy network (specific Coefficient grant unconfirmed).",
-      "tags": ["Switzerland", "unconfirmed"] },
+      "blurb": "Swiss AI & biosecurity policy non-profit in the European GCR-policy network (specific Coefficient grant unconfirmed). Co-hosted a March 2026 European Parliament roundtable on AI safety with SaferAI and MEPs McNamara and Lagodinsky.",
+      "tags": ["Switzerland", "unconfirmed", "EP roundtable 2026"] },
+
+    { "id": "doneer-effectief", "label": "Doneer Effectief", "kind": "grantee", "domain": "capital", "region": "europe",
+      "city": "Amsterdam", "country": "Netherlands", "lat": 52.370, "lon": 4.895, "magnitude": 9000000, "magnitudeLabel": ">$9M raised in 2025",
+      "blurb": "Dutch effective-giving platform, funded through Coefficient's effective-giving RFP and highlighted in the 2025 CEO letter. Raised over $9M in 2025, up from ~€6.3M in 2024 — confirmed Coefficient money building European donation infrastructure.",
+      "tags": ["Netherlands", "effective giving", "RFP grantee"] },
+
+    { "id": "effektiv-spenden", "label": "Effektiv Spenden", "kind": "grantee", "domain": "capital", "region": "europe",
+      "city": "Berlin", "country": "Germany", "lat": 52.531, "lon": 13.388, "magnitude": null, "magnitudeLabel": "RFP grantee · regrants onward",
+      "blurb": "German effective-giving platform funded through Coefficient's effective-giving RFP. Also a regrantor: its 'Ensuring Safe AI' and 'Safeguarding the Future' funds sent €170,227 to SaferAI in H1 2025 — a second-order route by which network-aligned money reaches European policy organisations.",
+      "tags": ["Germany", "effective giving", "regrantor"] },
 
     { "id": "eurogroup", "label": "Eurogroup for Animals", "kind": "grantee", "domain": "animal", "region": "europe",
       "city": "Brussels", "country": "Belgium", "lat": 50.842, "lon": 4.363, "magnitude": 5699748, "magnitudeLabel": "€5.5M / 3y (+ more)",
@@ -175,7 +190,7 @@
 
     { "id": "progress-ireland", "label": "Progress Ireland", "kind": "grantee", "domain": "progress", "region": "europe",
       "city": "Dublin", "country": "Ireland", "lat": 53.349, "lon": -6.260, "magnitude": null, "magnitudeLabel": "Collison-backed",
-      "blurb": "Think tank spearheaded by the Collisons in 2024 (CEO Sean Keyes) on housing, infrastructure and visa reform. John Collison's Oct-2025 Irish Times essay on planning/judicial-review sclerosis became a political event — the clearest sign the abundance agenda is being exported to Europe.",
+      "blurb": "Think tank backed by the Collisons since 2024 (CEO Sean Keyes) on housing, infrastructure and visa reform. Its 'garden homes' proposal was adopted by the Irish government, and John Collison's Oct-2025 Irish Times essay on planning reform drew wide political attention — the most developed European instance of the abundance agenda so far.",
       "tags": ["housing", "planning reform", "Collison"] },
 
     { "id": "works-in-progress", "label": "Works in Progress", "kind": "grantee", "domain": "progress", "region": "europe",
@@ -189,13 +204,18 @@
       "tags": ["adjacent", "metascience DNA"] },
 
     { "id": "britain-remade", "label": "Britain Remade", "kind": "grantee", "domain": "progress", "region": "europe", "adjacent": true,
-      "city": "London", "country": "UK", "lat": 51.512, "lon": -0.110, "magnitude": null, "magnitudeLabel": "the tell to watch",
-      "blurb": "UK growth/YIMBY campaign. A Coefficient Abundance & Growth grant to a group like this would be the tell that the US-first abundance fund is internationalising into Europe — none exists yet. A leading indicator, drawn as a dashed 'watch' link.",
+      "city": "London", "country": "UK", "lat": 51.512, "lon": -0.110, "magnitude": null, "magnitudeLabel": "indicator to watch",
+      "blurb": "UK growth/YIMBY campaign. A Coefficient Abundance & Growth grant to a group like this would be the first evidence that the US-first abundance fund is internationalising into Europe — none exists yet. Drawn as a dashed 'watch' link.",
       "tags": ["UK YIMBY", "watch", "no grant yet"] },
+
+    { "id": "cfg", "label": "Centre for Future Generations", "kind": "grantee", "domain": "biosecurity", "region": "europe", "adjacent": true,
+      "city": "Brussels", "country": "Belgium", "lat": 50.838, "lon": 4.373, "magnitude": null, "magnitudeLabel": "ecosystem-adjacent",
+      "blurb": "Brussels think tank on AI and biosecurity; a Talos placement host. Its 2025 biosecurity briefing (with RAND Europe, IBBIS and Pour Demain) anticipated the DNA-synthesis-screening provisions of the EU Biotech Act. Publicly funded by the Dreamery and Tanka foundations, not Coefficient — included as an adjacent node.",
+      "tags": ["adjacent", "biosecurity", "Talos host"] },
 
     { "id": "eu-ai-office", "label": "EU AI Office", "kind": "target", "domain": "ai", "region": "europe",
       "city": "Brussels", "country": "EU", "lat": 50.854, "lon": 4.362, "magnitude": null, "magnitudeLabel": "EU AI Act enforcer",
-      "blurb": "The European Commission body enforcing the EU AI Act. Talos fellows funded by the network are placed here and at OECD.AI — the point where abundance-world capital reaches inside EU institutions.",
+      "blurb": "The European Commission body enforcing the EU AI Act. Talos fellows, whose fellowship is majority-funded by Coefficient/Good Ventures, have been placed here and at OECD.AI — the most direct documented link between network funding and EU institutions.",
       "tags": ["EU AI Act", "fellow placements"] },
 
     { "id": "eu-biotech-act", "label": "EU Biotech Act", "kind": "target", "domain": "biosecurity", "region": "europe",
@@ -232,6 +252,7 @@
     { "source": "coefficient", "target": "fund-animal", "kind": "funds", "label": "runs" },
     { "source": "coefficient", "target": "fund-biosecurity", "kind": "funds", "label": "runs" },
     { "source": "coefficient", "target": "fund-strepa", "kind": "funds", "label": "runs" },
+    { "source": "coefficient", "target": "fund-eg", "kind": "funds", "label": "runs" },
     { "source": "coefficient", "target": "ifp", "kind": "cofunds", "label": "founding donor" },
     { "source": "coefficient", "target": "anthropic", "kind": "interlock", "label": "Karnofsky ⇄ D. Amodei (married); joined 2025" },
     { "source": "emergent-ventures", "target": "works-in-progress", "kind": "cofunds", "label": "seeded" },
@@ -240,8 +261,13 @@
     { "source": "fund-ai", "target": "cltr", "kind": "funds", "value": 6350000, "label": "~£4M + match" },
     { "source": "fund-ai", "target": "talos", "kind": "funds", "label": "majority of budget" },
     { "source": "fund-ai", "target": "future-society", "kind": "funds", "label": "orbit" },
-    { "source": "fund-ai", "target": "saferai", "kind": "watch", "label": "unconfirmed" },
+    { "source": "fund-ai", "target": "saferai", "kind": "watch", "label": "no direct grant confirmed" },
     { "source": "fund-ai", "target": "pourdemain", "kind": "watch", "label": "unconfirmed" },
+
+    { "source": "fund-eg", "target": "doneer-effectief", "kind": "funds", "label": "RFP grantee" },
+    { "source": "fund-eg", "target": "effektiv-spenden", "kind": "funds", "label": "RFP grantee" },
+    { "source": "effektiv-spenden", "target": "saferai", "kind": "funds", "value": 170227, "label": "€170k regrant (2025)" },
+    { "source": "talos", "target": "cfg", "kind": "influence", "label": "places fellows" },
 
     { "source": "fund-animal", "target": "eurogroup", "kind": "funds", "value": 5699748, "label": "€5.5M / 3y" },
     { "source": "fund-animal", "target": "ciwf", "kind": "funds", "value": 3380000, "label": "~£2.73M" },

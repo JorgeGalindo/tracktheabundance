@@ -281,6 +281,7 @@ h1 .hl-b { color: var(--eu-blue-bright); }
 .item[data-cat="biosecurity"] { border-left-color: var(--c-biosecurity); }
 .item[data-cat="money-flow"] { border-left-color: var(--c-capital); }
 .item[data-cat="org-network"] { border-left-color: var(--eu-blue-bright); }
+.item[data-cat="rfp-calls"] { border-left-color: var(--eu-yellow); }
 .item[data-cat="critique"] { border-left-color: #d0556a; }
 
 /* ---------- Footer ---------- */

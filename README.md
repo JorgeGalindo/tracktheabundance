@@ -7,11 +7,11 @@ Microsite de **mapeo, análisis y tracking** del *abundance funding world* con f
 ## Tres secciones
 
 1. **Map** (`index.html`) — mapa interactivo (SVG, sin dependencias). Dos modos:
-   - *Money flow*: US capital → engine → funds → beachheads europeos → arenas de política de la UE.
+   - *Money flow*: US capital → engine → funds → grantees europeos → arenas de política de la UE.
    - *Geography*: los grantees europeos situados geográficamente, con el capital estadounidense entrando desde el Atlántico.
    Datos en `data/graph.json`.
-2. **Analysis** (`analysis.html`) — síntesis estática: de dónde viene, quién es quién, evolución, estado actual en Europa, tensiones y qué vigilar.
-3. **Tracking** (`tracking.html`) — feed de novedades filtrable. Se refresca solo (ver abajo). Datos en `data/tracking.json`.
+2. **Analysis** (`analysis.html`) — síntesis estática: de dónde viene, quién es quién, evolución, estado actual en Europa, mecánica de las subvenciones (RFPs, matching, regranting, donantes asesorados), tensiones y qué vigilar.
+3. **Tracking** (`tracking.html`) — feed de novedades filtrable, con categoría propia para RFPs y convocatorias abiertas. Se refresca solo (ver abajo). Datos en `data/tracking.json`.
 
 ## Estética
 
